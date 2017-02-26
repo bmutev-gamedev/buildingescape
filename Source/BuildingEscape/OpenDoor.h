@@ -40,5 +40,9 @@ private:
     AActor* ActorThatOpens; // Pawn inherits from actor.
     AActor* Owner;
 
+    UPROPERTY(EditAnywhere)
+    float TriggerMass = 35.0f;
 
+    // Return total mass in kg
+    float GetTotalMassOnPlate();
 };
