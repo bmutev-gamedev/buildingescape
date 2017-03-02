@@ -25,5 +25,8 @@ public:
 
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyCategory")
     void SetLampState(bool LampState);
+
+    //UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyCategory")
+    //bool GetIsActorPresent();
 	
 };

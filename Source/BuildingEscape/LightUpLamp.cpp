@@ -21,24 +21,8 @@ ULightUpLamp::ULightUpLamp()
 void ULightUpLamp::BeginPlay()
 {
 	Super::BeginPlay();
-
-    Owner = GetOwner();
-
-    if (!PressurePlate)
-    {
-        UE_LOG(LogTemp, Error, TEXT("%s missing pressure plate."), *GetOwner()->GetName());
-    }
-
-    if (!AdjacentLampTrtigger)
-    {
-        UE_LOG(LogTemp, Error, TEXT("%s missing AdjacentLampTrtigger."), *GetOwner()->GetName());
-    }
-
-    if (!OppositeLamTrigger)
-    {
-        UE_LOG(LogTemp, Error, TEXT("%s missing OppositeLamTrigger."), *GetOwner()->GetName());
-    }
-	
+    
+    Owner = Cast<AWallLamp>(GetOwner());
 }
 
 
@@ -49,16 +33,16 @@ void ULightUpLamp::TickComponent( float DeltaTime, ELevelTick TickType, FActorCo
 
     if (DetectActorPresence())
     {
-        SwtichLightOn = true;
+        Owner->SetLampStateLocal(true);
     }
 
-    if (SwtichLightOn)
+    if (Owner->GetLampStateLocal())
     {
         LightUp.Broadcast();
     }
     else
     {
-        LightDown.Broadcast();
+        LightDown.Broadcast();            
     }
 }
 
@@ -81,10 +65,15 @@ bool ULightUpLamp::DetectActorPresence()
 
 bool ULightUpLamp::GetLampState_Implementation()
 {
-    return SwtichLightOn;
+    return Owner->GetLampStateLocal();
 }
 
 void ULightUpLamp::SetLampState_Implementation(bool LampState)
 {
-    SwtichLightOn = LampState;
+    Owner->SetLampStateLocal(LampState);
 }
+
+//bool ULightUpLamp::GetIsActorPresent_Implementation()
+//{
+//    return DetectActorPresence();
+//}

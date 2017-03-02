@@ -4,6 +4,7 @@
 
 #include "Components/ActorComponent.h"
 #include "LampState.h"
+#include "WallLamp.h"
 #include "LightUpLamp.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLightUpEvent);
@@ -37,19 +38,15 @@ public:
     void SetLampState(bool LampState);
     virtual void SetLampState_Implementation(bool LampState) override;	
 
+    //UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
+    //bool GetIsActorPresent();
+    //virtual bool GetIsActorPresent_Implementation() override;	
+
 private:
     UPROPERTY(EditAnywhere)
     ATriggerVolume* PressurePlate = nullptr;
 
-    UPROPERTY(EditAnywhere)
-    AActor* AdjacentLampTrtigger  = nullptr;
-
-    UPROPERTY(EditAnywhere)
-    AActor* OppositeLamTrigger    = nullptr;
-	
-    AActor* Owner = nullptr;
-
-    bool SwtichLightOn = false;
+    AWallLamp* Owner = nullptr;
 
     bool DetectActorPresence();
 
