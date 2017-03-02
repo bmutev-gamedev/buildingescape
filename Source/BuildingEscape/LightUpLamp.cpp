@@ -28,6 +28,16 @@ void ULightUpLamp::BeginPlay()
     {
         UE_LOG(LogTemp, Error, TEXT("%s missing pressure plate."), *GetOwner()->GetName());
     }
+
+    if (!AdjacentLampTrtigger)
+    {
+        UE_LOG(LogTemp, Error, TEXT("%s missing AdjacentLampTrtigger."), *GetOwner()->GetName());
+    }
+
+    if (!OppositeLamTrigger)
+    {
+        UE_LOG(LogTemp, Error, TEXT("%s missing OppositeLamTrigger."), *GetOwner()->GetName());
+    }
 	
 }
 
@@ -38,6 +48,11 @@ void ULightUpLamp::TickComponent( float DeltaTime, ELevelTick TickType, FActorCo
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 
     if (DetectActorPresence())
+    {
+        SwtichLightOn = true;
+    }
+
+    if (SwtichLightOn)
     {
         LightUp.Broadcast();
     }
@@ -62,4 +77,14 @@ bool ULightUpLamp::DetectActorPresence()
     }
 
     return false;
+}
+
+bool ULightUpLamp::GetLampState_Implementation()
+{
+    return SwtichLightOn;
+}
+
+void ULightUpLamp::SetLampState_Implementation(bool LampState)
+{
+    SwtichLightOn = LampState;
 }

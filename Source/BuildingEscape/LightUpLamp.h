@@ -3,12 +3,13 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
+#include "LampState.h"
 #include "LightUpLamp.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLightUpEvent);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class BUILDINGESCAPE_API ULightUpLamp : public UActorComponent
+class BUILDINGESCAPE_API ULightUpLamp : public UActorComponent,  public ILampState
 {
 	GENERATED_BODY()
 
@@ -28,11 +29,29 @@ public:
     UPROPERTY(BlueprintAssignable)
     FLightUpEvent LightDown;
 
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
+    bool GetLampState();
+    virtual bool GetLampState_Implementation() override;
+
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
+    void SetLampState(bool LampState);
+    virtual void SetLampState_Implementation(bool LampState) override;	
+
 private:
     UPROPERTY(EditAnywhere)
     ATriggerVolume* PressurePlate = nullptr;
+
+    UPROPERTY(EditAnywhere)
+    AActor* AdjacentLampTrtigger  = nullptr;
+
+    UPROPERTY(EditAnywhere)
+    AActor* OppositeLamTrigger    = nullptr;
 	
     AActor* Owner = nullptr;
 
+    bool SwtichLightOn = false;
+
     bool DetectActorPresence();
+
+    void SyncLampState();
 };
