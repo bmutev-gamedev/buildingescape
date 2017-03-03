@@ -211,7 +211,7 @@ void AChamberConsole::RotateText(AEndGameText * EndGameText)
     EndGameText->SetActorRotation(TextRot);
 }
 
-bool AChamberConsole::GetTriggerState_Implementation()
+bool AChamberConsole::GetTriggerState_Implementation() const
 {
     return IsTriggered;
 }

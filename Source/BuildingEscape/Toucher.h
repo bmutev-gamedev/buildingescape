@@ -43,13 +43,13 @@ private:
     void SetupInputComponent();	
 
     // Get current start of reach line
-    FVector GetReachLineStart();
+    FVector FindReachLineStart();
 
     // Get current end of reach line
-    FVector GetReachLineEnd();
+    FVector CalcReachLineEnd();
 
     // Return hit for first physics body in reach
-    const FHitResult GetFirstStaticBodyInReach();
+    const FHitResult FindFirstStaticBodyInReach();
 
     // Ray-casst and touch what is in reach
     void Touch();

@@ -32,19 +32,19 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-    bool GetLampState();
-    virtual bool GetLampState_Implementation() override;
+    bool GetLampState() const;
+    virtual bool GetLampState_Implementation() const override;
 
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
     void SetLampState(bool LampState);
     virtual void SetLampState_Implementation(bool LampState) override;	
 	
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-    bool GetIsActorPresent();
-    virtual bool GetIsActorPresent_Implementation() override;	
+    bool GetIsActorPresent() const;
+    virtual bool GetIsActorPresent_Implementation() const override;	
 
     // Used to give the lamp state to components of the lamp.
-    bool GetLampStateLocal();
+    bool GetLampStateLocal() const;
 
     // Used to set the lamp state through components of the lamp.
     void SetLampStateLocal(bool LampState);

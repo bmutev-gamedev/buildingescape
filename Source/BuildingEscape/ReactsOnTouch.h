@@ -26,7 +26,7 @@ class BUILDINGESCAPE_API IReactsOnTouch
 
 public:
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyCategory")
-    bool GetTriggerState();
+    bool GetTriggerState() const;
 
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyCategory")
     void ActivateTrigger();	

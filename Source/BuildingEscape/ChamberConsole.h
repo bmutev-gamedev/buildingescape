@@ -36,8 +36,8 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-    bool GetTriggerState();
-    virtual bool GetTriggerState_Implementation() override;
+    bool GetTriggerState() const;
+    virtual bool GetTriggerState_Implementation() const override;
 
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
     void ActivateTrigger();

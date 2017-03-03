@@ -43,7 +43,7 @@ void UOpenDoor::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompo
 
     // Poll the Trigger Volume
     // If the ActorThatOpens is in the volume
-    if (GetTotalMassOnPlate() > TriggerMass)
+    if (CalcTotalMassOnPlate() > TriggerMass)
     {
         OnOpen.Broadcast();
     }
@@ -56,7 +56,7 @@ void UOpenDoor::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompo
 }
 
 // Return total mass in kg
-float UOpenDoor::GetTotalMassOnPlate()
+float UOpenDoor::CalcTotalMassOnPlate()
 {
     float TotalMass = 0.f;
 

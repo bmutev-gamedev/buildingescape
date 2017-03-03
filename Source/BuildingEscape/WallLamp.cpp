@@ -37,7 +37,7 @@ void AWallLamp::Tick( float DeltaTime )
 
 }
 
-bool AWallLamp::GetLampState_Implementation()
+bool AWallLamp::GetLampState_Implementation() const
 {
     return SwtichLightOn;
 }
@@ -47,14 +47,14 @@ void AWallLamp::SetLampState_Implementation(bool LampState)
     SwtichLightOn = LampState;
 }
 
-bool AWallLamp::GetIsActorPresent_Implementation()
+bool AWallLamp::GetIsActorPresent_Implementation() const
 {
     ULightUpLamp* LightUpLamp = FindComponentByClass<ULightUpLamp>();
     return LightUpLamp->DetectActorPresence();
 }
 
 // Used to give the lamp state to components of the lamp.
-bool AWallLamp::GetLampStateLocal()
+bool AWallLamp::GetLampStateLocal() const
 {
     return SwtichLightOn;
 }

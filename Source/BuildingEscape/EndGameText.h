@@ -29,7 +29,6 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-
     void UpdateText();
 
     void SetEndGameState(bool state);

@@ -35,7 +35,7 @@ void ADoorTrigger::Tick( float DeltaTime )
 
 }
 
-bool ADoorTrigger::GetTriggerState_Implementation()
+bool ADoorTrigger::GetTriggerState_Implementation() const
 {
     return IsTriggered;
 }

@@ -26,12 +26,12 @@ class BUILDINGESCAPE_API ILampState
 
 public:
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyCategory")
-    bool GetLampState();
+    bool GetLampState() const;
 
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyCategory")
     void SetLampState(bool LampState);
 
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyCategory")
-    bool GetIsActorPresent();
+    bool GetIsActorPresent() const;
 	
 };

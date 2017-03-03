@@ -59,7 +59,7 @@ void UToucher::SetupInputComponent()
     }
 }
 
-FVector UToucher::GetReachLineStart()
+FVector UToucher::FindReachLineStart()
 {
     FVector PlayerViewPointLocation;
     FRotator PlayerViewPointRotation;
@@ -72,7 +72,7 @@ FVector UToucher::GetReachLineStart()
     return PlayerViewPointLocation;
 }
 
-FVector UToucher::GetReachLineEnd()
+FVector UToucher::CalcReachLineEnd()
 {
     FVector PlayerViewPointLocation;
     FRotator PlayerViewPointRotation;
@@ -85,7 +85,7 @@ FVector UToucher::GetReachLineEnd()
     return PlayerViewPointLocation + (Reach * PlayerViewPointRotation.Vector());
 }
 
-const FHitResult UToucher::GetFirstStaticBodyInReach()
+const FHitResult UToucher::FindFirstStaticBodyInReach()
 {
     /// Ray-cast(Line-Trace) out to reach distance
     FHitResult HitResult;
@@ -93,8 +93,8 @@ const FHitResult UToucher::GetFirstStaticBodyInReach()
 
     GetWorld()->LineTraceSingleByObjectType(
         OUT HitResult,
-        GetReachLineStart(),
-        GetReachLineEnd(),
+        FindReachLineStart(),
+        CalcReachLineEnd(),
         FCollisionObjectQueryParams(ECollisionChannel::ECC_WorldStatic),
         TraceParameters
     );
@@ -105,7 +105,7 @@ const FHitResult UToucher::GetFirstStaticBodyInReach()
 void UToucher::Touch()
 {
     // LINE TRACE and reach any actors with physics body collision channel set
-    auto HitResult = GetFirstStaticBodyInReach();
+    auto HitResult = FindFirstStaticBodyInReach();
     auto ActorHit = HitResult.GetActor();
 
     UE_LOG(LogTemp, Warning, TEXT("Touch initiated."), *GetOwner()->GetName());

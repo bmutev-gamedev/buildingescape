@@ -40,14 +40,14 @@ void UGrabber::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
     if (PhysicsHandle->GrabbedComponent)
     {
         // Move the object that we're holdin
-        PhysicsHandle->SetTargetLocation(GetReachLineEnd());
+        PhysicsHandle->SetTargetLocation(CalcReachLineEnd());
     }
 }
 
 void UGrabber::Grab()
 {
     // LINE TRACE and reach any actors with physics body collision channel set
-    auto HitResult = GetFirstPhysicsBodyInReach();
+    auto HitResult = FindFirstPhysicsBodyInReach();
     auto ComponentToGrab = HitResult.GetComponent();
     auto ActorHit = HitResult.GetActor();
 
@@ -97,7 +97,7 @@ void UGrabber::SetupInputComponent()
     }
 }
 
-const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
+const FHitResult UGrabber::FindFirstPhysicsBodyInReach()
 {
     /// Ray-cast(Line-Trace) out to reach distance
     FHitResult HitResult;
@@ -105,8 +105,8 @@ const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
     
     GetWorld()->LineTraceSingleByObjectType(
         OUT HitResult,
-        GetReachLineStart(),
-        GetReachLineEnd(),
+        FindReachLineStart(),
+        CalcReachLineEnd(),
         FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
         TraceParameters
     );
@@ -114,7 +114,7 @@ const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
     return HitResult;
 }
 
-FVector UGrabber::GetReachLineStart()
+FVector UGrabber::FindReachLineStart()
 {
     FVector PlayerViewPointLocation;
     FRotator PlayerViewPointRotation;
@@ -127,7 +127,7 @@ FVector UGrabber::GetReachLineStart()
     return PlayerViewPointLocation;
 }
 
-FVector UGrabber::GetReachLineEnd()
+FVector UGrabber::CalcReachLineEnd()
 {
     FVector PlayerViewPointLocation;
     FRotator PlayerViewPointRotation;
