@@ -22,7 +22,7 @@ void ULightUpLamp::BeginPlay()
 {
 	Super::BeginPlay();
     
-    Owner = Cast<AWallLamp>(GetOwner());
+    Owner = Cast<AWallLamp>(GetOwner()); 
 }
 
 
@@ -31,18 +31,19 @@ void ULightUpLamp::TickComponent( float DeltaTime, ELevelTick TickType, FActorCo
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 
+    // Tell the lamp to shut down the light
     if (DetectActorPresence())
     {
         Owner->SetLampStateLocal(true);
     }
-
+    
     if (Owner->GetLampStateLocal())
     {
         LightUp.Broadcast();
     }
     else
     {
-        LightDown.Broadcast();            
+        LightDown.Broadcast();     
     }
 }
 
@@ -62,18 +63,3 @@ bool ULightUpLamp::DetectActorPresence()
 
     return false;
 }
-
-bool ULightUpLamp::GetLampState_Implementation()
-{
-    return Owner->GetLampStateLocal();
-}
-
-void ULightUpLamp::SetLampState_Implementation(bool LampState)
-{
-    Owner->SetLampStateLocal(LampState);
-}
-
-//bool ULightUpLamp::GetIsActorPresent_Implementation()
-//{
-//    return DetectActorPresence();
-//}

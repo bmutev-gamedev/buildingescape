@@ -3,10 +3,11 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "ReactsOnTouch.h"
 #include "ChamberConsole.generated.h"
 
 UCLASS()
-class BUILDINGESCAPE_API AChamberConsole : public AActor
+class BUILDINGESCAPE_API AChamberConsole : public AActor, public IReactsOnTouch
 {
 	GENERATED_BODY()
 	
@@ -19,6 +20,14 @@ public:
 	
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
+
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
+    bool GetTriggerState();
+    virtual bool GetTriggerState_Implementation() override;
+
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
+    void ActivateTrigger();
+    virtual void ActivateTrigger_Implementation() override;	
 
 private:
     UPROPERTY(EditAnywhere)
@@ -33,6 +42,9 @@ private:
     UPROPERTY(EditAnywhere)
     AActor* SphereField      = nullptr;
 
+    UPROPERTY(EditAnywhere)
+    AActor* EndGameTxt       = nullptr;
+
     void UpdateLighSequence();
 
     bool TryUnlockSphereField();
@@ -40,6 +52,8 @@ private:
     void ResetSequence();
 
     void TurnLampsOff();
+
+    bool IsTriggered = false;
 
     bool IsSphereFieldLocked = true;
 

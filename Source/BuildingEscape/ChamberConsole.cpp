@@ -3,6 +3,7 @@
 #include "BuildingEscape.h"
 #include "ChamberConsole.h"
 #include "LampState.h"
+#include "EndGameText.h"
 
 // Sets default values
 AChamberConsole::AChamberConsole()
@@ -37,6 +38,11 @@ void AChamberConsole::BeginPlay()
         UE_LOG(LogTemp, Error, TEXT("%s missing SphereField."), *GetName());
     }
 
+    if (!EndGameTxt)
+    {
+        UE_LOG(LogTemp, Error, TEXT("%s missing EndGameText."), *GetName());
+    }
+
     ResetSequence();
 }
 
@@ -45,14 +51,38 @@ void AChamberConsole::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
-    UpdateLighSequence();
+    if (!IsTriggered)
+    {
+        UpdateLighSequence();
+    }
+    else
+    {
+        Cast<AEndGameText>(EndGameTxt)->SetEndGameState(true);
+
+        FVector PlayerViewPointLocation;
+        FRotator PlayerViewPointRotation;
+
+        GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
+            OUT PlayerViewPointLocation,
+            OUT PlayerViewPointRotation
+        );
+
+        FVector TextLocation = Cast<AEndGameText>(EndGameTxt)->GetActorLocation();
+
+        FVector vec = PlayerViewPointLocation - TextLocation;
+        FRotator rot = FRotationMatrix::MakeFromX(vec).Rotator();
+
+        // Pitch the text a bit so the light can illuminate it.
+        FRotator TextRot = rot + FRotator(10.f, 0.f, 0.f);
+        Cast<AEndGameText>(EndGameTxt)->SetActorRotation(TextRot);
+    }
 }
 
 void AChamberConsole::UpdateLighSequence()
 {
     if (!LeftLampTrtigger) { return; }
-    if (!RightLampTrigger)  { return; }
-    if (!BackLampTrigger)   { return; }
+    if (!RightLampTrigger) { return; }
+    if (!BackLampTrigger)  { return; }
     if (!SphereField)      { return; }
 
     ILampState* LeftLamp = Cast<ILampState>(LeftLampTrtigger);
@@ -100,8 +130,6 @@ void AChamberConsole::UpdateLighSequence()
     }
     else
     {
-        UE_LOG(LogTemp, Warning, TEXT("All Lights are on."));
-
         // Try to unlock the sphere when all light have been triggered.
         // If the sequence of triggering is not right reset lights.
         if (TryUnlockSphereField())
@@ -164,4 +192,14 @@ void AChamberConsole::TurnLampsOff()
 
     LampInterface  = Cast<ILampState>(BackLampTrigger);
     LampInterface->Execute_SetLampState(BackLampTrigger, false);
+}
+
+bool AChamberConsole::GetTriggerState_Implementation()
+{
+    return IsTriggered;
+}
+
+void AChamberConsole::ActivateTrigger_Implementation()
+{
+    IsTriggered = true;
 }

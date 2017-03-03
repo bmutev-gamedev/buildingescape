@@ -3,6 +3,7 @@
 #include "BuildingEscape.h"
 #include "LampState.h"
 #include "WallLamp.h"
+#include "LightUpLamp.h"
 
 // Sets default values
 AWallLamp::AWallLamp()
@@ -34,6 +35,12 @@ bool AWallLamp::GetLampState_Implementation()
 void AWallLamp::SetLampState_Implementation(bool LampState)
 {
     SwtichLightOn = LampState;
+}
+
+bool AWallLamp::GetIsActorPresent_Implementation()
+{
+    ULightUpLamp* LightUpLamp = FindComponentByClass<ULightUpLamp>();
+    return LightUpLamp->DetectActorPresence();
 }
 
 bool AWallLamp::GetLampStateLocal()

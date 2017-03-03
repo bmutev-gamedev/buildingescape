@@ -29,6 +29,10 @@ public:
     void SetLampState(bool LampState);
     virtual void SetLampState_Implementation(bool LampState) override;	
 	
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
+    bool GetIsActorPresent();
+    virtual bool GetIsActorPresent_Implementation() override;	
+
     bool GetLampStateLocal();
     void SetLampStateLocal(bool LampState);
 

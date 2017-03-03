@@ -10,7 +10,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLightUpEvent);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class BUILDINGESCAPE_API ULightUpLamp : public UActorComponent,  public ILampState
+class BUILDINGESCAPE_API ULightUpLamp : public UActorComponent
 {
 	GENERATED_BODY()
 
@@ -30,25 +30,11 @@ public:
     UPROPERTY(BlueprintAssignable)
     FLightUpEvent LightDown;
 
-    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-    bool GetLampState();
-    virtual bool GetLampState_Implementation() override;
-
-    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-    void SetLampState(bool LampState);
-    virtual void SetLampState_Implementation(bool LampState) override;	
-
-    //UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-    //bool GetIsActorPresent();
-    //virtual bool GetIsActorPresent_Implementation() override;	
+    bool DetectActorPresence();
 
 private:
     UPROPERTY(EditAnywhere)
     ATriggerVolume* PressurePlate = nullptr;
 
-    AWallLamp* Owner = nullptr;
-
-    bool DetectActorPresence();
-
-    void SyncLampState();
+    AWallLamp* Owner = nullptr; 
 };
