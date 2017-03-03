@@ -1,4 +1,17 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/**
+    BuildingEscape
+    ChamberConsole.cpp
+
+    Purpose: ChamberConsole class is used to communicate with the forcefield, 
+             all lamps in the chamber room and the text tip above the console.
+             The Console monitors all lamps and controls them so that they can be 
+             switched ON or OFF based on the actions of the player.
+             Also it controls when the forcefield will be deactivated and 
+             what text will be displayer above it.
+
+    @author Borislav Mutev
+    @version 1.0 3/3/2017
+*/
 
 #include "BuildingEscape.h"
 #include "ChamberConsole.h"
@@ -53,32 +66,16 @@ void AChamberConsole::Tick( float DeltaTime )
 
     if (!IsTriggered)
     {
-        UpdateLighSequence();
+        LampSequenceCheck();
     }
     else
     {
         Cast<AEndGameText>(EndGameTxt)->SetEndGameState(true);
-
-        FVector PlayerViewPointLocation;
-        FRotator PlayerViewPointRotation;
-
-        GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
-            OUT PlayerViewPointLocation,
-            OUT PlayerViewPointRotation
-        );
-
-        FVector TextLocation = Cast<AEndGameText>(EndGameTxt)->GetActorLocation();
-
-        FVector vec = PlayerViewPointLocation - TextLocation;
-        FRotator rot = FRotationMatrix::MakeFromX(vec).Rotator();
-
-        // Pitch the text a bit so the light can illuminate it.
-        FRotator TextRot = rot + FRotator(10.f, 0.f, 0.f);
-        Cast<AEndGameText>(EndGameTxt)->SetActorRotation(TextRot);
+        RotateText(Cast<AEndGameText>(EndGameTxt));
     }
 }
 
-void AChamberConsole::UpdateLighSequence()
+void AChamberConsole::LampSequenceCheck()
 {
     if (!LeftLampTrtigger) { return; }
     if (!RightLampTrigger) { return; }
@@ -89,24 +86,19 @@ void AChamberConsole::UpdateLighSequence()
     ILampState* RightLam = Cast<ILampState>(RightLampTrigger);
     ILampState* BackLam  = Cast<ILampState>(BackLampTrigger);
 
-    // UnlockSequence[0] is reserved for checking purposes
-    // so count starts from 1
-    static int count = 0;
-
     // Keep track of triggered lamps
     static bool TriggeredLamps[3] = { false, false, false };
 
-    // Lamps numbering
+    // Lamps IDs
     const int LeftLampID  = 0;
     const int RightLampID = 1;
     const int BackLampID  = 2;
 
-    // TODO: After lights reset the light that the player is at is activated right away
-    // and it seems that it did not reset.
+    static int count = 0;
     if (count < UnlockSequenceSize)
     {
-        // Save which lamp was triggered at what time
-        // If state is true, i.e. the lamp is on and
+        // Save which lamp was triggered in what sequence
+        // If lamp should be switched ON and it has not been yet
         if (LeftLamp->Execute_GetLampState(LeftLampTrtigger) && !TriggeredLamps[LeftLampID])
         {
             UE_LOG(LogTemp, Warning, TEXT("Cyan Light is on."));
@@ -114,6 +106,7 @@ void AChamberConsole::UpdateLighSequence()
             TriggeredLamps[LeftLampID] = true;
         }
 
+        // If lamp should be switched ON and it has not been yet
         if (RightLam->Execute_GetLampState(RightLampTrigger) && !TriggeredLamps[RightLampID])
         {
             UE_LOG(LogTemp, Warning, TEXT("Red Light is on."));
@@ -121,6 +114,7 @@ void AChamberConsole::UpdateLighSequence()
             TriggeredLamps[RightLampID] = true;
         }
 
+        // If lamp should be switched ON and it has not been yet
         if (BackLam->Execute_GetLampState(BackLampTrigger) && !TriggeredLamps[BackLampID])
         {
             UE_LOG(LogTemp, Warning, TEXT("Yellow Light is on."));
@@ -131,8 +125,9 @@ void AChamberConsole::UpdateLighSequence()
     else
     {
         // Try to unlock the sphere when all light have been triggered.
-        // If the sequence of triggering is not right reset lights.
-        if (TryUnlockSphereField())
+        // If the sequence of triggering is not right reset the lights.
+        // NOTE: The lamp which the player activated last will stay ON.
+        if (ShouldUnlockSphereField())
         {
             SphereField->SetActorHiddenInGame(true);
             SphereField->SetActorEnableCollision(false);
@@ -150,7 +145,7 @@ void AChamberConsole::UpdateLighSequence()
     }
 }
 
-bool AChamberConsole::TryUnlockSphereField()
+bool AChamberConsole::ShouldUnlockSphereField()
 {
     // Lamps numbering
     const int LeftLampID  = 0;
@@ -170,14 +165,15 @@ bool AChamberConsole::TryUnlockSphereField()
     }
 }
 
+// Reset the activation sequence of the lamps
 void AChamberConsole::ResetSequence()
 {
-    UnlockSequence[0] = -2;
+    UnlockSequence[0] = -1;
     UnlockSequence[1] = -1;
     UnlockSequence[2] = -1;
-    UnlockSequence[3] = -1;
 }
 
+// Communicate through the ILampState interface to tell the lamps to switch OFF.
 void AChamberConsole::TurnLampsOff()
 {
     if (!LeftLampTrtigger) { return; }
@@ -192,6 +188,27 @@ void AChamberConsole::TurnLampsOff()
 
     LampInterface  = Cast<ILampState>(BackLampTrigger);
     LampInterface->Execute_SetLampState(BackLampTrigger, false);
+}
+
+// Rotate the text above the console towards the player.
+void AChamberConsole::RotateText(AEndGameText * EndGameText)
+{
+    FVector PlayerViewPointLocation;
+    FRotator PlayerViewPointRotation;
+
+    GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
+        OUT PlayerViewPointLocation,
+        OUT PlayerViewPointRotation
+    );
+
+    FVector TextLocation = EndGameText->GetActorLocation();
+
+    FVector vec = PlayerViewPointLocation - TextLocation;
+    FRotator rot = FRotationMatrix::MakeFromX(vec).Rotator();
+
+    // Pitch the text a bit so the spot light can illuminate it.
+    FRotator TextRot = rot + FRotator(10.f, 0.f, 0.f);
+    EndGameText->SetActorRotation(TextRot);
 }
 
 bool AChamberConsole::GetTriggerState_Implementation()

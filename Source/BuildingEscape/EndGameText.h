@@ -1,4 +1,13 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/**
+    BuildingEscape
+    EndGameText.h
+
+    Purpose: EndGameText class is used to create text in the level and control that text,
+             displaying different string depending on the state of the level.  
+
+    @course Borislav Mutev
+    @version 1.0 3/3/2017
+*/
 
 #pragma once
 
@@ -20,7 +29,9 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
+
     void UpdateText();
+
     void SetEndGameState(bool state);
 
 private:

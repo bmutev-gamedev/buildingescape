@@ -1,4 +1,12 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/**
+    BuildingEscape
+    Grabber.h
+
+    Purpose: Grabber class represents a component used to simulate grabbing.
+
+    @course "The Unreal Engine Developer Course" at Udemy led by Ben Tristem and Sam Pattuzzi
+    @version 1.0 3/3/2017
+*/
 
 #pragma once
 

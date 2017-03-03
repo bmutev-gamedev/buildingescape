@@ -1,4 +1,13 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/**
+    BuildingEscape
+    ReactsOnTouch.h
+
+    Purpose: ReactsOnTouch class is an interface used to give objects the ability to
+             react on "touch" events.
+
+    @author Borislav Mutev
+    @version 1.0 3/3/2017
+*/
 
 #pragma once
 
@@ -11,14 +20,10 @@ class UReactsOnTouch : public UInterface
 	GENERATED_UINTERFACE_BODY()
 };
 
-/**
- * 
- */
 class BUILDINGESCAPE_API IReactsOnTouch
 {
 	GENERATED_IINTERFACE_BODY()
 
-	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "MyCategory")
     bool GetTriggerState();

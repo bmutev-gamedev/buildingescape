@@ -1,9 +1,23 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/**
+    BuildingEscape
+    ChamberConsole.h
+
+    Purpose: ChamberConsole class is used to communicate with the forcefield, 
+             all lamps in the chamber room and the text tip above the console.
+             The Console monitors all lamps and controls them so that they can be 
+             switched ON or OFF based on the actions of the player.
+             Also it controls when the forcefield will be deactivated and 
+             what text will be displayer above it.
+
+    @author Borislav Mutev
+    @version 1.0 3/3/2017
+*/
 
 #pragma once
 
 #include "GameFramework/Actor.h"
 #include "ReactsOnTouch.h"
+#include "EndGameText.h"
 #include "ChamberConsole.generated.h"
 
 UCLASS()
@@ -45,14 +59,26 @@ private:
     UPROPERTY(EditAnywhere)
     AActor* EndGameTxt       = nullptr;
 
-    void UpdateLighSequence();
+    // Detect if the player has triggered/switched any lamps
+    // and check if the sequence is right.
+    void LampSequenceCheck();
 
-    bool TryUnlockSphereField();
+    // Check if the force field should be deactivated.
+    bool ShouldUnlockSphereField();
 
+    // When the player has deactivated the lamps in wrong order
+    // the UnlockSequence array is reseted with default values. 
     void ResetSequence();
 
+    // When a wrong sequence of lamp switchining is made
+    // the lamps are turned off.
     void TurnLampsOff();
 
+    // Used with the text tip above the console in the chamber room.
+    // Pitches the text a bit so it can be illuminated by the light.
+    void RotateText(AEndGameText* EndGameText);
+
+    // Has the console been interacted with.
     bool IsTriggered = false;
 
     bool IsSphereFieldLocked = true;
@@ -60,8 +86,8 @@ private:
     static const int UnlockSequenceSize = 3;
     // Holds the temporary sequence of lamp triggering
     // Lamp numbering:
+    //  LeftLampTrtigger = 0
     //  LeftLampTrtigger = 1
-    //  LeftLampTrtigger = 2
-    //  BackLamTrigger   = 3
+    //  BackLamTrigger   = 2
     int UnlockSequence[UnlockSequenceSize] = {};
 };

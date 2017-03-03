@@ -1,4 +1,15 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/**
+    BuildingEscape
+    Toucher.h
+
+    Purpose: Toucher class represents a component of the DefaultPawn.
+             It is used to interact with objects/triggers found in the level.
+             NOTE: This class is very simmilar to the Grabber class and is possible to create one
+             combined class.
+
+    @author Borislav Mutev
+    @version 1.0 3/3/2017
+*/
 
 #pragma once
 

@@ -1,4 +1,12 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/**
+    BuildingEscape
+    ChamberDoorOpen.h
+
+    Purpose: ChamberDoorOpen is a class for a component used with the door leading to the Chamber room.
+
+    @course Borislav Mutev
+    @version 1.0 3/3/2017
+*/
 
 #pragma once
 
@@ -39,5 +47,7 @@ private:
     AActor* RightRockTrigger   = nullptr;
 
     bool TriggersState[4] = {};
+
+    bool ShouldOpenDoor();
 
 };

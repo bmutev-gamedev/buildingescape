@@ -1,4 +1,14 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/**
+    BuildingEscape
+    WallLamp.cpp
+
+    Purpose: WallLamp class is representing the lamps found in the Chamber room.
+             It is used to give a way to control a lamp externally through ILampState interface
+             or internally, through a component.
+
+    @author Borislav Mutev
+    @version 1.0 3/3/2017
+*/
 
 #include "BuildingEscape.h"
 #include "LampState.h"
@@ -43,11 +53,13 @@ bool AWallLamp::GetIsActorPresent_Implementation()
     return LightUpLamp->DetectActorPresence();
 }
 
+// Used to give the lamp state to components of the lamp.
 bool AWallLamp::GetLampStateLocal()
 {
     return SwtichLightOn;
 }
 
+// Used to set the lamp state through components of the lamp.
 void AWallLamp::SetLampStateLocal(bool LampState)
 {
     SwtichLightOn = LampState;

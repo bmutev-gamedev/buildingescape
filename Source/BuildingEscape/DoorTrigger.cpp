@@ -1,4 +1,13 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/**
+    BuildingEscape
+    DoorTrigger.h
+
+    Purpose: DoorTrigger is a base class for all objects in the level that are used as triggers 
+             which are to be touched to activate them.
+
+    @course Borislav Mutev
+    @version 1.0 3/3/2017
+*/
 
 #include "BuildingEscape.h"
 #include "DoorTrigger.h"

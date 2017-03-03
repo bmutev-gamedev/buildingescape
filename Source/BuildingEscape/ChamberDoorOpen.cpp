@@ -1,4 +1,12 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/**
+    BuildingEscape
+    ChamberDoorOpen.h
+
+    Purpose: ChamberDoorOpen is a class for a component used with the door leading to the Chamber room.
+
+    @course Borislav Mutev
+    @version 1.0 3/3/2017
+*/
 
 #include "BuildingEscape.h"
 #include "ChamberDoorOpen.h"
@@ -47,6 +55,14 @@ void UChamberDoorOpen::TickComponent( float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 
+    if (ShouldOpenDoor())
+    {
+        OnOpen.Broadcast();
+    }
+}
+
+bool ShouldOpenDoor()
+{
     if (!LeftStatueTrigger)  { return; }
     if (!RightStatueTrigger) { return; }
     if (!LeftRockTrigger)    { return; }
@@ -63,11 +79,13 @@ void UChamberDoorOpen::TickComponent( float DeltaTime, ELevelTick TickType, FAct
 
     TouchInterface = Cast<IReactsOnTouch>(RightRockTrigger);
     TriggersState[3] = TouchInterface->Execute_GetTriggerState (RightRockTrigger);
-    
+
     // Open the door when all trigger are triggered
     if (TriggersState[0] && TriggersState[1] && TriggersState[2] && TriggersState[3])
     {
-        OnOpen.Broadcast();
+        return true;
     }
+        
+    return false;
 }
 
