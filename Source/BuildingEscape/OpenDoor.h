@@ -45,5 +45,5 @@ private:
     float TriggerMass = 35.0f;
 
     // Return total mass in kg
-    float GetTotalMassOnPlate();
+    float CalcTotalMassOnPlate();
 };
