@@ -3,7 +3,7 @@
     DoorTrigger.h
 
     Purpose: DoorTrigger is a base class for all objects in the level that are used as triggers 
-             which are to be touched to activate them.
+             which are to react to "touch".
 
     @course Borislav Mutev
     @version 1.0 3/3/2017
