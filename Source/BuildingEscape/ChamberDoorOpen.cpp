@@ -61,12 +61,12 @@ void UChamberDoorOpen::TickComponent( float DeltaTime, ELevelTick TickType, FAct
     }
 }
 
-bool ShouldOpenDoor()
+bool UChamberDoorOpen::ShouldOpenDoor()
 {
-    if (!LeftStatueTrigger)  { return; }
-    if (!RightStatueTrigger) { return; }
-    if (!LeftRockTrigger)    { return; }
-    if (!RightRockTrigger)   { return; }
+    if (!LeftStatueTrigger)  { return false; }
+    if (!RightStatueTrigger) { return false; }
+    if (!LeftRockTrigger)    { return false; }
+    if (!RightRockTrigger)   { return false; }
 
     IReactsOnTouch* TouchInterface = Cast<IReactsOnTouch>(LeftStatueTrigger);
     TriggersState[0] = TouchInterface->Execute_GetTriggerState (LeftStatueTrigger);
