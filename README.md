@@ -19,10 +19,3 @@ This component class is used by lamps so that they can be controlled. This compo
 
 #### ChamberConsole
 This is the base class for the chamber console. It is responsible for monitoring the states of the lamps found in the chamber room and to interact with the sphere field around the console.
-
-## TODOs
-- Implement main menu, options menu, level menu
-- Implement basic save/load mechanism
-- Implement basic multiplayer(atleast 2 players playing over net)
-- Revisit pawn components(Grabber, Toucher) and try to create a unified one
-- Create more levels
