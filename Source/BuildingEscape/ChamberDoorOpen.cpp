@@ -10,14 +10,11 @@
 
 #include "BuildingEscape.h"
 #include "ChamberDoorOpen.h"
-#include "ReactsOnTouch.h"
+#include "IInteractiveObject.h"
 
 // Sets default values for this component's properties
 UChamberDoorOpen::UChamberDoorOpen()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
@@ -68,16 +65,16 @@ bool UChamberDoorOpen::ShouldOpenDoor()
     if (!LeftRockTrigger)    { return false; }
     if (!RightRockTrigger)   { return false; }
 
-    IReactsOnTouch* TouchInterface = Cast<IReactsOnTouch>(LeftStatueTrigger);
+    IInteractiveObject* TouchInterface = Cast<IInteractiveObject>(LeftStatueTrigger);
     TriggersState[0] = TouchInterface->Execute_GetTriggerState (LeftStatueTrigger);
 
-    TouchInterface = Cast<IReactsOnTouch>(RightStatueTrigger);
+    TouchInterface = Cast<IInteractiveObject>(RightStatueTrigger);
     TriggersState[1] = TouchInterface->Execute_GetTriggerState (RightStatueTrigger);
 
-    TouchInterface = Cast<IReactsOnTouch>(LeftRockTrigger);
+    TouchInterface = Cast<IInteractiveObject>(LeftRockTrigger);
     TriggersState[2] = TouchInterface->Execute_GetTriggerState (LeftRockTrigger);
 
-    TouchInterface = Cast<IReactsOnTouch>(RightRockTrigger);
+    TouchInterface = Cast<IInteractiveObject>(RightRockTrigger);
     TriggersState[3] = TouchInterface->Execute_GetTriggerState (RightRockTrigger);
 
     // Open the door when all trigger are triggered
