@@ -1,8 +1,8 @@
 /**
     BuildingEscape
-    DoorTrigger.h
+    TriggerObject.h
 
-    Purpose: DoorTrigger is a base class for all objects in the level that are used as triggers 
+    Purpose: TriggerObject is a base class for all objects in the level that are used as triggers 
              which are to react to "touch".
 
     @course Borislav Mutev
@@ -10,11 +10,11 @@
 */
 
 #include "BuildingEscape.h"
-#include "DoorTrigger.h"
+#include "TriggerObject.h"
 
 
 // Sets default values
-ADoorTrigger::ADoorTrigger()
+ATriggerObject::ATriggerObject()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -22,25 +22,25 @@ ADoorTrigger::ADoorTrigger()
 }
 
 // Called when the game starts or when spawned
-void ADoorTrigger::BeginPlay()
+void ATriggerObject::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void ADoorTrigger::Tick( float DeltaTime )
+void ATriggerObject::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
 }
 
-bool ADoorTrigger::GetTriggerState_Implementation() const
+bool ATriggerObject::GetTriggerState_Implementation() const
 {
     return IsTriggered;
 }
 
-void ADoorTrigger::ActivateTrigger_Implementation()
+void ATriggerObject::ActivateTrigger_Implementation()
 {
     IsTriggered = true;
 }

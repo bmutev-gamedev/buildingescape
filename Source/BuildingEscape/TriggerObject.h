@@ -1,8 +1,8 @@
 /**
     BuildingEscape
-    DoorTrigger.h
+    TriggerObject.h
 
-    Purpose: DoorTrigger is a base class for all objects in the level that are used as triggers 
+    Purpose: TriggerObject is a base class for all objects in the level that are used as triggers 
              which are to react to "touch".
 
     @course Borislav Mutev
@@ -13,16 +13,16 @@
 
 #include "GameFramework/Actor.h"
 #include "ReactsOnTouch.h"
-#include "DoorTrigger.generated.h"
+#include "TriggerObject.generated.h"
 
 UCLASS()
-class BUILDINGESCAPE_API ADoorTrigger : public AActor,  public IReactsOnTouch
+class BUILDINGESCAPE_API ATriggerObject : public AActor,  public IReactsOnTouch
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ADoorTrigger();
+    ATriggerObject();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
