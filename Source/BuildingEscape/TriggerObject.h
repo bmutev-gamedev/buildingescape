@@ -12,11 +12,11 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "ReactsOnTouch.h"
+#include "IInteractiveObject.h"
 #include "TriggerObject.generated.h"
 
 UCLASS()
-class BUILDINGESCAPE_API ATriggerObject : public AActor,  public IReactsOnTouch
+class BUILDINGESCAPE_API ATriggerObject : public AActor,  public IInteractiveObject
 {
 	GENERATED_BODY()
 	

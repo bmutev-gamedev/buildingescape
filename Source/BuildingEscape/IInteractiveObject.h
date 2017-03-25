@@ -1,8 +1,8 @@
 /**
     BuildingEscape
-    ReactsOnTouch.h
+    IInteractiveObject.h
 
-    Purpose: ReactsOnTouch class is an interface used to give objects the ability to
+    Purpose: IInteractiveObject class is an interface used to give objects the ability to
              react on "touch" events.
 
     @author Borislav Mutev
@@ -11,16 +11,16 @@
 
 #pragma once
 
-#include "ReactsOnTouch.generated.h"
+#include "IInteractiveObject.generated.h"
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)
-class UReactsOnTouch : public UInterface
+class UInteractiveObject : public UInterface
 {
 	GENERATED_UINTERFACE_BODY()
 };
 
-class BUILDINGESCAPE_API IReactsOnTouch
+class BUILDINGESCAPE_API IInteractiveObject
 {
 	GENERATED_IINTERFACE_BODY()
 

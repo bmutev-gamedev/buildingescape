@@ -13,15 +13,12 @@
 
 #include "BuildingEscape.h"
 #include "Toucher.h"
-#include "ReactsOnTouch.h"
+#include "IInteractiveObject.h"
 
 
 // Sets default values for this component's properties
 UToucher::UToucher()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
@@ -112,7 +109,7 @@ void UToucher::Touch()
 
     if (ActorHit && ActorHit->ActorHasTag("DoorTrigger"))
     {
-        IReactsOnTouch* TouchInterface = Cast<IReactsOnTouch>(ActorHit);
+        IInteractiveObject* TouchInterface = Cast<IInteractiveObject>(ActorHit);
         if (TouchInterface)
         {
             UE_LOG(LogTemp, Warning, TEXT("Touched %s trigger."), *GetOwner()->GetName());
