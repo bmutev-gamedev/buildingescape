@@ -64,7 +64,7 @@ void AChamberConsole::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
-    if (!IsTriggered)
+    if (!ATriggerObject::GetTriggerState_Implementation())
     {
         LampSequenceCheck();
     }
@@ -209,14 +209,4 @@ void AChamberConsole::RotateText(AEndGameText * EndGameText)
     // Pitch the text a bit so the spot light can illuminate it.
     FRotator TextRot = rot + FRotator(10.f, 0.f, 0.f);
     EndGameText->SetActorRotation(TextRot);
-}
-
-bool AChamberConsole::GetTriggerState_Implementation() const
-{
-    return IsTriggered;
-}
-
-void AChamberConsole::ActivateTrigger_Implementation()
-{
-    IsTriggered = true;
 }

@@ -15,13 +15,12 @@
 
 #pragma once
 
-#include "GameFramework/Actor.h"
-#include "ReactsOnTouch.h"
+#include "TriggerObject.h"
 #include "EndGameText.h"
 #include "ChamberConsole.generated.h"
 
 UCLASS()
-class BUILDINGESCAPE_API AChamberConsole : public AActor, public IReactsOnTouch
+class BUILDINGESCAPE_API AChamberConsole : public ATriggerObject
 {
 	GENERATED_BODY()
 	
@@ -34,14 +33,6 @@ public:
 	
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
-
-    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-    bool GetTriggerState() const;
-    virtual bool GetTriggerState_Implementation() const override;
-
-    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-    void ActivateTrigger();
-    virtual void ActivateTrigger_Implementation() override;	
 
 private:
     UPROPERTY(EditAnywhere)
@@ -77,9 +68,6 @@ private:
     // Used with the text tip above the console in the chamber room.
     // Pitches the text a bit so it can be illuminated by the light.
     void RotateText(AEndGameText* EndGameText);
-
-    // Has the console been interacted with.
-    bool IsTriggered = false;
 
     bool IsSphereFieldLocked = true;
 
