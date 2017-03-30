@@ -12,7 +12,6 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "IInteractiveObject.h"
 #include "TriggerObject.generated.h"
 
 UCLASS()

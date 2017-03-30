@@ -10,7 +10,6 @@
 
 #include "BuildingEscape.h"
 #include "ChamberDoorOpen.h"
-#include "IInteractiveObject.h"
 
 // Sets default values for this component's properties
 UChamberDoorOpen::UChamberDoorOpen()
