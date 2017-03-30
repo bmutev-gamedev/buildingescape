@@ -16,7 +16,7 @@
 #include "TriggerObject.generated.h"
 
 UCLASS()
-class BUILDINGESCAPE_API ATriggerObject : public AActor,  public IInteractiveObject
+class BUILDINGESCAPE_API ATriggerObject : public AActor
 {
 	GENERATED_BODY()
 	
@@ -30,13 +30,11 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-    bool GetTriggerState() const;
-    virtual bool GetTriggerState_Implementation() const override;
+    UFUNCTION(BlueprintCallable, Category = "MyCategory")
+    bool GetState() const;
 
-    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-    void ActivateTrigger();
-    virtual void ActivateTrigger_Implementation() override;	
+    UFUNCTION(BlueprintCallable, Category = "MyCategory")
+    void Toggle();
 
 protected:
     bool IsTriggered = false;

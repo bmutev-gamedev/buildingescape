@@ -14,7 +14,6 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "LampState.h"
 #include "WallLamp.h"
 #include "LightUpLamp.generated.h"
 
@@ -41,11 +40,12 @@ public:
     UPROPERTY(BlueprintAssignable)
     FLightUpEvent LightDown;
 
-    bool DetectActorPresence();
-
 private:
     UPROPERTY(EditAnywhere)
     ATriggerVolume* PressurePlate = nullptr;
 
     AWallLamp* Owner = nullptr; 
+
+    // TODO: Change to event driven implementation
+    bool ShouldToggle = false;
 };

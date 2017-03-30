@@ -11,9 +11,7 @@
 */
 
 #include "BuildingEscape.h"
-#include "LampState.h"
 #include "WallLamp.h"
-#include "LightUpLamp.h"
 
 // Sets default values
 AWallLamp::AWallLamp()
@@ -37,30 +35,14 @@ void AWallLamp::Tick( float DeltaTime )
 
 }
 
-bool AWallLamp::GetLampState_Implementation() const
-{
-    return SwtichLightOn;
-}
-
-void AWallLamp::SetLampState_Implementation(bool LampState)
-{
-    SwtichLightOn = LampState;
-}
-
-bool AWallLamp::GetIsActorPresent_Implementation() const
-{
-    ULightUpLamp* LightUpLamp = FindComponentByClass<ULightUpLamp>();
-    return LightUpLamp->DetectActorPresence();
-}
-
 // Used to give the lamp state to components of the lamp.
-bool AWallLamp::GetLampStateLocal() const
+bool AWallLamp::GetState() const
 {
-    return SwtichLightOn;
+    return ATriggerObject::GetState();
 }
 
 // Used to set the lamp state through components of the lamp.
-void AWallLamp::SetLampStateLocal(bool LampState)
+void AWallLamp::ToggleState()
 {
-    SwtichLightOn = LampState;
+    ATriggerObject::Toggle();
 }

@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include "Components/ActorComponent.h"
+#include "TriggerObject.h"
 #include "ChamberDoorOpen.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FChamberDoorEvent);
@@ -35,16 +35,16 @@ public:
 	
 private:
     UPROPERTY(EditAnywhere)
-    AActor* LeftStatueTrigger  = nullptr;
+    ATriggerObject* LeftStatueTrigger  = nullptr;
 
     UPROPERTY(EditAnywhere)
-    AActor* RightStatueTrigger = nullptr;
+    ATriggerObject* RightStatueTrigger = nullptr;
 
     UPROPERTY(EditAnywhere)
-    AActor* LeftRockTrigger    = nullptr;
+    ATriggerObject* LeftRockTrigger    = nullptr;
 
     UPROPERTY(EditAnywhere)
-    AActor* RightRockTrigger   = nullptr;
+    ATriggerObject* RightRockTrigger   = nullptr;
 
     bool TriggersState[4] = {};
 

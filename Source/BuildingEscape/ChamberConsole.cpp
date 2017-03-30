@@ -15,7 +15,6 @@
 
 #include "BuildingEscape.h"
 #include "ChamberConsole.h"
-#include "LampState.h"
 #include "EndGameText.h"
 
 // Sets default values
@@ -64,7 +63,7 @@ void AChamberConsole::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
-    if (!ATriggerObject::GetTriggerState_Implementation())
+    if (!GetState())
     {
         LampSequenceCheck();
     }
@@ -82,10 +81,6 @@ void AChamberConsole::LampSequenceCheck()
     if (!BackLampTrigger)  { return; }
     if (!SphereField)      { return; }
 
-    ILampState* LeftLamp = Cast<ILampState>(LeftLampTrtigger);
-    ILampState* RightLam = Cast<ILampState>(RightLampTrigger);
-    ILampState* BackLam  = Cast<ILampState>(BackLampTrigger);
-
     // Keep track of triggered lamps
     static bool TriggeredLamps[3] = { false, false, false };
 
@@ -99,7 +94,7 @@ void AChamberConsole::LampSequenceCheck()
     {
         // Save which lamp was triggered in what sequence
         // If lamp should be switched ON and it has not been yet
-        if (LeftLamp->Execute_GetLampState(LeftLampTrtigger) && !TriggeredLamps[LeftLampID])
+        if (LeftLampTrtigger->GetState() && !TriggeredLamps[LeftLampID])
         {
             UE_LOG(LogTemp, Warning, TEXT("Cyan Light is on."));
             UnlockSequence[count++] = LeftLampID;
@@ -107,17 +102,17 @@ void AChamberConsole::LampSequenceCheck()
         }
 
         // If lamp should be switched ON and it has not been yet
-        if (RightLam->Execute_GetLampState(RightLampTrigger) && !TriggeredLamps[RightLampID])
+        if (RightLampTrigger->GetState() && !TriggeredLamps[RightLampID])
         {
-            UE_LOG(LogTemp, Warning, TEXT("Red Light is on."));
+            UE_LOG(LogTemp, Warning, TEXT("Yellow Light is on."));
             UnlockSequence[count++] = RightLampID;
             TriggeredLamps[RightLampID] = true;
         }
 
         // If lamp should be switched ON and it has not been yet
-        if (BackLam->Execute_GetLampState(BackLampTrigger) && !TriggeredLamps[BackLampID])
+        if (BackLampTrigger->GetState() && !TriggeredLamps[BackLampID])
         {
-            UE_LOG(LogTemp, Warning, TEXT("Yellow Light is on."));
+            UE_LOG(LogTemp, Warning, TEXT("Red Light is on."));
             UnlockSequence[count++] = BackLampID;
             TriggeredLamps[BackLampID] = true;
         }
@@ -180,14 +175,20 @@ void AChamberConsole::TurnLampsOff()
     if (!RightLampTrigger) { return; }
     if (!BackLampTrigger)  { return; }
 
-    ILampState* LampInterface = Cast<ILampState>(LeftLampTrtigger);
-    LampInterface->Execute_SetLampState(LeftLampTrtigger, false);
+    if (LeftLampTrtigger->GetState())
+    {
+        LeftLampTrtigger->Toggle();
+    }
 
-    LampInterface = Cast<ILampState>(RightLampTrigger);
-    LampInterface->Execute_SetLampState(RightLampTrigger, false);
+    if (RightLampTrigger->GetState())
+    {
+        RightLampTrigger->Toggle();
+    }
 
-    LampInterface  = Cast<ILampState>(BackLampTrigger);
-    LampInterface->Execute_SetLampState(BackLampTrigger, false);
+    if (BackLampTrigger->GetState())
+    {
+        BackLampTrigger->Toggle();
+    }
 }
 
 // Rotate the text above the console towards the player.

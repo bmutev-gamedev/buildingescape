@@ -21,7 +21,6 @@ ULightUpLamp::ULightUpLamp()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
@@ -42,26 +41,9 @@ void ULightUpLamp::TickComponent( float DeltaTime, ELevelTick TickType, FActorCo
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 
-    // Tell the lamp to shut down the light
-    if (DetectActorPresence())
-    {
-        Owner->SetLampStateLocal(true);
-    }
-    
-    if (Owner->GetLampStateLocal())
-    {
-        LightUp.Broadcast();
-    }
-    else
-    {
-        LightDown.Broadcast();     
-    }
-}
-
-bool ULightUpLamp::DetectActorPresence()
-{
+    // Switch ON/OFF the lamp based on actor presence
     TArray<AActor*> OverlappingActors;
-    if (!PressurePlate) { return false; }
+    if (!PressurePlate) { return; }
 
     PressurePlate->GetOverlappingActors(
         OUT OverlappingActors
@@ -69,8 +51,19 @@ bool ULightUpLamp::DetectActorPresence()
 
     if (OverlappingActors.Num() > 0)
     {
-        return true;
+        if (!Owner->GetState())
+        {
+            Owner->ToggleState();
+        }
     }
 
-    return false;
+    // Switch ON/OFF the lamp based on lamp precense   
+    if (Owner->GetState())
+    {
+        LightUp.Broadcast();
+    }
+    else
+    {
+        LightDown.Broadcast();     
+    }
 }

@@ -35,13 +35,13 @@ void ATriggerObject::Tick( float DeltaTime )
 
 }
 
-bool ATriggerObject::GetTriggerState_Implementation() const
+bool ATriggerObject::GetState() const
 {
     return IsTriggered;
 }
 
-void ATriggerObject::ActivateTrigger_Implementation()
+void ATriggerObject::Toggle()
 {
-    IsTriggered = true;
+    IsTriggered = !IsTriggered;
 }
 

@@ -65,17 +65,10 @@ bool UChamberDoorOpen::ShouldOpenDoor()
     if (!LeftRockTrigger)    { return false; }
     if (!RightRockTrigger)   { return false; }
 
-    IInteractiveObject* TouchInterface = Cast<IInteractiveObject>(LeftStatueTrigger);
-    TriggersState[0] = TouchInterface->Execute_GetTriggerState (LeftStatueTrigger);
-
-    TouchInterface = Cast<IInteractiveObject>(RightStatueTrigger);
-    TriggersState[1] = TouchInterface->Execute_GetTriggerState (RightStatueTrigger);
-
-    TouchInterface = Cast<IInteractiveObject>(LeftRockTrigger);
-    TriggersState[2] = TouchInterface->Execute_GetTriggerState (LeftRockTrigger);
-
-    TouchInterface = Cast<IInteractiveObject>(RightRockTrigger);
-    TriggersState[3] = TouchInterface->Execute_GetTriggerState (RightRockTrigger);
+    TriggersState[0] = LeftStatueTrigger->GetState();
+    TriggersState[1] = RightStatueTrigger->GetState();
+    TriggersState[2] = LeftRockTrigger->GetState();
+    TriggersState[3] = RightRockTrigger->GetState();
 
     // Open the door when all trigger are triggered
     if (TriggersState[0] && TriggersState[1] && TriggersState[2] && TriggersState[3])

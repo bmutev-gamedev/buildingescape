@@ -13,11 +13,11 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "LampState.h"
+#include "TriggerObject.h"
 #include "WallLamp.generated.h"
 
 UCLASS()
-class BUILDINGESCAPE_API AWallLamp : public AActor, public ILampState
+class BUILDINGESCAPE_API AWallLamp : public ATriggerObject
 {
 	GENERATED_BODY()
 	
@@ -31,23 +31,11 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-    bool GetLampState() const;
-    virtual bool GetLampState_Implementation() const override;
-
-    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-    void SetLampState(bool LampState);
-    virtual void SetLampState_Implementation(bool LampState) override;	
-	
-    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "MyCategory")
-    bool GetIsActorPresent() const;
-    virtual bool GetIsActorPresent_Implementation() const override;	
-
     // Used to give the lamp state to components of the lamp.
-    bool GetLampStateLocal() const;
+    bool GetState() const;
 
     // Used to set the lamp state through components of the lamp.
-    void SetLampStateLocal(bool LampState);
+    void ToggleState();
 
 private:
     bool SwtichLightOn = false;

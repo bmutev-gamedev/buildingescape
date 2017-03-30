@@ -36,19 +36,19 @@ public:
 
 private:
     UPROPERTY(EditAnywhere)
-    AActor* LeftLampTrtigger = nullptr;
+    ATriggerObject* LeftLampTrtigger = nullptr;
 
     UPROPERTY(EditAnywhere)
-    AActor* RightLampTrigger  = nullptr;
+    ATriggerObject* RightLampTrigger = nullptr;
 
     UPROPERTY(EditAnywhere)
-    AActor* BackLampTrigger   = nullptr;
+    ATriggerObject* BackLampTrigger  = nullptr;
 
     UPROPERTY(EditAnywhere)
-    AActor* SphereField      = nullptr;
+    AActor* SphereField              = nullptr;
 
     UPROPERTY(EditAnywhere)
-    AActor* EndGameTxt       = nullptr;
+    AActor* EndGameTxt               = nullptr;
 
     // Detect if the player has triggered/switched any lamps
     // and check if the sequence is right.

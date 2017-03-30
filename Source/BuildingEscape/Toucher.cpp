@@ -13,7 +13,7 @@
 
 #include "BuildingEscape.h"
 #include "Toucher.h"
-#include "IInteractiveObject.h"
+#include "TriggerObject.h"
 
 
 // Sets default values for this component's properties
@@ -109,11 +109,7 @@ void UToucher::Touch()
 
     if (ActorHit && ActorHit->ActorHasTag("DoorTrigger"))
     {
-        IInteractiveObject* TouchInterface = Cast<IInteractiveObject>(ActorHit);
-        if (TouchInterface)
-        {
-            UE_LOG(LogTemp, Warning, TEXT("Touched %s trigger."), *GetOwner()->GetName());
-            TouchInterface->Execute_ActivateTrigger (ActorHit);
-        }  
+        UE_LOG(LogTemp, Warning, TEXT("Touched %s trigger."), *GetOwner()->GetName());
+        Cast<ATriggerObject>(ActorHit)->Toggle();
     }
 }
