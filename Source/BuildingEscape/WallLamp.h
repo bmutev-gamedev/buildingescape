@@ -36,7 +36,4 @@ public:
 
     // Used to set the lamp state through components of the lamp.
     void ToggleState();
-
-private:
-    bool SwtichLightOn = false;
 };

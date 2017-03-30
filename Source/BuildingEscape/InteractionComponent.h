@@ -1,27 +1,27 @@
 /**
     BuildingEscape
-    Grabber.h
+    InteractionComponent.h
 
-    Purpose: Grabber class represents a component used to simulate grabbing.
+    Purpose: InteractionComponent class represents a component used to simulate grabbing.
 
     @course "The Unreal Engine Developer Course" at Udemy led by Ben Tristem and Sam Pattuzzi
-    @version 1.0 3/3/2017
+    @version 1.1 30/3/2017
 */
 
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "Grabber.generated.h"
+#include "InteractionComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class BUILDINGESCAPE_API UGrabber : public UActorComponent
+class BUILDINGESCAPE_API UInteractionComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UGrabber();
+    UInteractionComponent();
 
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -38,24 +38,30 @@ private:
 
     UInputComponent* InputComponent = nullptr;
 
+    // Setup (assumed) attached input component
+    void SetupInputComponent();	
+
     // Ray-casst and grab what is in reach
     void Grab();
 
     // Called when grab is released
     void Release();
 
+    // Ray-casst and touch what is in reach
+    void Touch();
+
     // Find (assumed) attached physics handle
     void FindPhysicsComponent();
-
-    // Setup (assumed) attached input component
-    void SetupInputComponent();	
-
-    // Return hit for first physics body in reach
-    const FHitResult FindFirstPhysicsBodyInReach();
 
     // Get current start of reach line
     FVector FindReachLineStart();
 
     // Get current end of reach line
     FVector CalcReachLineEnd();
+
+    // Return hit for first physics body in reach
+    const FHitResult FindFirstPhysicsBodyInReach();
+
+    // Return hit for first static body in reach
+    const FHitResult FindFirstStaticBodyInReach();
 };
