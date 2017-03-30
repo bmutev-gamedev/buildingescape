@@ -6,7 +6,7 @@
              which are to react to "touch".
 
     @course Borislav Mutev
-    @version 1.0 3/3/2017
+    @version 1.0 30/3/2017
 */
 
 #include "BuildingEscape.h"

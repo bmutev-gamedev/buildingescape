@@ -10,7 +10,7 @@
              what text will be displayer above it.
 
     @author Borislav Mutev
-    @version 1.0 3/3/2017
+    @version 1.1 30/3/2017
 */
 
 #pragma once
