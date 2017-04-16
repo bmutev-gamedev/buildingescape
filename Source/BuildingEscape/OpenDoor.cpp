@@ -1,13 +1,3 @@
-/**
-    BuildingEscape
-    OpenDoor.cpp
-
-    Purpose: OpenDoor class represents a component used to controll a StaticMeshActor door object.
-
-    @course "The Unreal Engine Developer Course" at Udemy led by Ben Tristem and Sam Pattuzzi
-    @version 1.0 3/3/2017
-*/
-
 #include "BuildingEscape.h"
 #include "OpenDoor.h"
 

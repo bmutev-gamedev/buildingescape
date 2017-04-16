@@ -1,13 +1,3 @@
-/**
-    BuildingEscape
-    InteractionComponent.cpp
-
-    Purpose: InteractionComponent class represents a component used to simulate grabbing.
-
-    @course "The Unreal Engine Developer Course" at Udemy led by Ben Tristem and Sam Pattuzzi
-    @version 1.1 30/3/2017
-*/
-
 #include "BuildingEscape.h"
 #include "InteractionComponent.h"
 #include "TriggerObject.h"

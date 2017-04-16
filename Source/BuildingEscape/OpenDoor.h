@@ -1,13 +1,3 @@
-/**
-    BuildingEscape
-    OpenDoor.h
-
-    Purpose: OpenDoor class represents a component used to controll a StaticMeshActor door object.
-
-    @course "The Unreal Engine Developer Course" at Udemy led by Ben Tristem and Sam Pattuzzi
-    @version 1.0 3/3/2017
-*/
-
 #pragma once
 
 #include "Components/ActorComponent.h"
@@ -15,6 +5,12 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDoorEvent);
 
+/**
+ * OpenDoor class represents a component used to controll a StaticMeshActor door object.
+ * 
+ * @course "The Unreal Engine Developer Course" at Udemy led by Ben Tristem and Sam Pattuzzi
+ * @version 1.0 3/3/2017
+ */
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BUILDINGESCAPE_API UOpenDoor : public UActorComponent
 {

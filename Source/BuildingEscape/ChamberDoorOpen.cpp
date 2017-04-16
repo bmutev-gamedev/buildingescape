@@ -1,13 +1,3 @@
-/**
-    BuildingEscape
-    ChamberDoorOpen.h
-
-    Purpose: ChamberDoorOpen is a class for a component used with the door leading to the Chamber room.
-
-    @course Borislav Mutev
-    @version 1.0 3/3/2017
-*/
-
 #include "BuildingEscape.h"
 #include "ChamberDoorOpen.h"
 

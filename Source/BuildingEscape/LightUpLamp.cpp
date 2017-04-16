@@ -1,16 +1,3 @@
-/**
-    BuildingEscape
-    LightUpLamp.cpp
-
-    Purpose: LightUpLamp class represents a component used to switch ON and OFF the light
-             of a lamp actor derived from the AWallLamp class. Also it is used to detect if a player 
-             is present at the trigger volume associated with the lamp actor.
-
-
-    @course Borislav Mutev
-    @version 1.1 30/3/2017
-*/
-
 #include "BuildingEscape.h"
 #include "LightUpLamp.h"
 

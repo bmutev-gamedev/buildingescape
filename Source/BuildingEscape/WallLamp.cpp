@@ -1,15 +1,3 @@
-/**
-    BuildingEscape
-    WallLamp.cpp
-
-    Purpose: WallLamp class is representing the lamps found in the Chamber room.
-             It is used to give a way to control a lamp externally through ILampState interface
-             or internally, through a component.
-
-    @author Borislav Mutev
-    @version 1.1 30/3/2017
-*/
-
 #include "BuildingEscape.h"
 #include "WallLamp.h"
 

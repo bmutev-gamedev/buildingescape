@@ -1,19 +1,14 @@
-/**
-    BuildingEscape
-    InteractionComponent.h
-
-    Purpose: InteractionComponent class represents a component used to simulate grabbing.
-
-    @course "The Unreal Engine Developer Course" at Udemy led by Ben Tristem and Sam Pattuzzi
-    @version 1.1 30/3/2017
-*/
-
 #pragma once
 
 #include "Components/ActorComponent.h"
 #include "InteractionComponent.generated.h"
 
-
+/**
+ * InteractionComponent class represents a component used to simulate grabbing.
+ *
+ * @course "The Unreal Engine Developer Course" at Udemy led by Ben Tristem and Sam Pattuzzi
+ * @version 1.1 30/3/2017
+ */
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BUILDINGESCAPE_API UInteractionComponent : public UActorComponent
 {

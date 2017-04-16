@@ -1,21 +1,17 @@
-/**
-    BuildingEscape
-    WallLamp.h
-
-    Purpose: WallLamp class is representing the lamps found in the Chamber room.
-             It is used to give a way to control a lamp externally through ILampState interface
-             or internally, through a component.
-
-    @author Borislav Mutev
-    @version 1.1 30/3/2017
-*/
-
 #pragma once
 
 #include "GameFramework/Actor.h"
 #include "TriggerObject.h"
 #include "WallLamp.generated.h"
 
+/**
+ * WallLamp class is representing the lamps found in the Chamber room.
+ * It is used to give a way to control a lamp externally through ILampState interface
+ * or internally, through a component.
+ * 
+ * @author Borislav Mutev
+ * @version 1.1 30/3/2017
+ */
 UCLASS()
 class BUILDINGESCAPE_API AWallLamp : public ATriggerObject
 {

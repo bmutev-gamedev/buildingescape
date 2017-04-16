@@ -1,19 +1,15 @@
-/**
-    BuildingEscape
-    EndGameText.h
-
-    Purpose: EndGameText class is used to create text in the level and control that text,
-             displaying different string depending on the state of the level.  
-
-    @course Borislav Mutev
-    @version 1.0 3/3/2017
-*/
-
 #pragma once
 
 #include "GameFramework/Actor.h"
 #include "EndGameText.generated.h"
 
+/**
+ * EndGameText class is used to create text in the level and control that text,
+ * displaying different string depending on the state of the level.  
+ *
+ * @course Borislav Mutev
+ * @version 1.0 3/3/2017
+*/
 UCLASS()
 class BUILDINGESCAPE_API AEndGameText : public AActor
 {

@@ -1,13 +1,3 @@
-/**
-    BuildingEscape
-    ChamberDoorOpen.h
-
-    Purpose: ChamberDoorOpen is a class for a component used with the door leading to the Chamber room.
-
-    @course Borislav Mutev
-    @version 1.0 3/3/2017
-*/
-
 #pragma once
 
 #include "TriggerObject.h"
@@ -15,6 +5,12 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FChamberDoorEvent);
 
+/** 
+ * ChamberDoorOpen is a class for a component used with the door leading to the Chamber room.
+ *
+ * @course Borislav Mutev
+ * @version 1.0 3/3/2017
+ */
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BUILDINGESCAPE_API UChamberDoorOpen : public UActorComponent
 {

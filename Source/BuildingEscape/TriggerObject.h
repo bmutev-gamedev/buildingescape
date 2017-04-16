@@ -1,19 +1,15 @@
-/**
-    BuildingEscape
-    TriggerObject.h
-
-    Purpose: TriggerObject is a base class for all objects in the level that are used as triggers 
-             which are to react to "touch".
-
-    @course Borislav Mutev
-    @version 1.0 30/3/2017
-*/
-
 #pragma once
 
 #include "GameFramework/Actor.h"
 #include "TriggerObject.generated.h"
 
+/**
+ * TriggerObject is a base class for all objects in the level that are used as triggers 
+ * which are to react to "touch".
+ *
+ * @course Borislav Mutev
+ * @version 1.0 30/3/2017
+ */
 UCLASS()
 class BUILDINGESCAPE_API ATriggerObject : public AActor
 {

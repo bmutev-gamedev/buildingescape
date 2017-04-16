@@ -1,18 +1,3 @@
-/**
-    BuildingEscape
-    ChamberConsole.cpp
-
-    Purpose: ChamberConsole class is used to communicate with the forcefield, 
-             all lamps in the chamber room and the text tip above the console.
-             The Console monitors all lamps and controls them so that they can be 
-             switched ON or OFF based on the actions of the player.
-             Also it controls when the forcefield will be deactivated and 
-             what text will be displayer above it.
-
-    @author Borislav Mutev
-    @version 1.1 30/3/2017
-*/
-
 #include "BuildingEscape.h"
 #include "ChamberConsole.h"
 #include "EndGameText.h"
